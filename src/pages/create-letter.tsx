@@ -1,7 +1,11 @@
-export const CreateLetter = () => {
+import { Page } from '@/shared/ui';
+import { Heading, Separator } from '@chakra-ui/react';
+
+export const CreateLetterPage = () => {
     return (
-        <div>
-            <h1>Create Letter</h1>
-        </div>
+        <Page>
+            <Heading>New application</Heading>
+            <Separator />
+        </Page>
     );
 };
