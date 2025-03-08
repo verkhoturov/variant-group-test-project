@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router';
 import { Providers } from './providers';
 
 import { HomePage } from '@/pages/home';
-import { CreateLetterPage } from '@/pages/create-letter';
+import { CreateLetterPage } from '@/pages/createLetter';
 
 import './global.scss';
 
