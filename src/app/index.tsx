@@ -11,7 +11,7 @@ export const App = () => {
         <Providers>
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/create-letter" element={<CreateCoverLetterPage />} />
+                <Route path="/create-cover-letter" element={<CreateCoverLetterPage />} />
             </Routes>
         </Providers>
     );
