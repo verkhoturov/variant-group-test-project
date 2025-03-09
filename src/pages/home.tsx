@@ -13,7 +13,7 @@ export const HomePage = () => {
         <Page>
             <Flex justifyContent="space-between" alignItems="center">
                 <Heading>Applications</Heading>
-                <Button onClick={() => navigate('/create-letter')}>Create New</Button>
+                <Button onClick={() => navigate('/create-cover-letter')}>Create New</Button>
             </Flex>
             <Separator />
 

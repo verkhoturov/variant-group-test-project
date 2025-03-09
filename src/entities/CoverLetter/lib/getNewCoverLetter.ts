@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-export const getCoverLetterTemplate = ({
+export const getNewCoverLetter = ({
     companyName,
     jobTitle,
     skillsList,
