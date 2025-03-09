@@ -1,11 +1,11 @@
 import { BrowserRouter } from 'react-router';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import { LettersProvider } from './lettersContext';
+import { CoverLettersProvider } from './CoverLettersProvider';
 
 export const Providers = (props: { children: React.ReactNode }) => (
     <ChakraProvider value={defaultSystem}>
         <BrowserRouter>
-            <LettersProvider>{props.children}</LettersProvider>
+            <CoverLettersProvider>{props.children}</CoverLettersProvider>
         </BrowserRouter>
     </ChakraProvider>
 );

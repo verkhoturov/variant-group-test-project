@@ -2,8 +2,8 @@ import React from 'react';
 import { Input } from '@chakra-ui/react';
 import { Textarea } from '@chakra-ui/react';
 import { Field, Button } from '@/shared/ui';
+import { getCoverLetterTemplate, CoverLetter } from '@/entities/CoverLetter';
 import { useForm } from 'react-hook-form';
-import { useLetters } from '@/app/useLetters';
 
 interface ApplicationFormValues {
     jobTitle: string;
@@ -12,28 +12,12 @@ interface ApplicationFormValues {
     details: string;
 }
 
-const getTemplate = (values: ApplicationFormValues) => `
-Dear ${values.companyName} Team,
-
-I am writing to express my interest in the ${values.jobTitle} position.
-
-My experience in the realm combined with my skills in ${values.skillsList} make me a strong candidate for this role.
-
-${values.details}
-
-I am confident that my skills and enthusiasm would translate into valuable contributions to your esteemed organization.
-
-Thank you for considering my application. I eagerly await the opportunity to discuss my qualifications further.
-`;
-
 interface ApplicationFormProps {
-    setLetterText: (text: string) => void;
+    setLetter: (letter: CoverLetter) => void;
 }
 
-export const ApplicationForm = ({ setLetterText }: ApplicationFormProps) => {
+export const ApplicationForm = ({ setLetter }: ApplicationFormProps) => {
     const [isComplete, setIsComplete] = React.useState(false);
-
-    const { addLetter } = useLetters();
 
     const {
         register,
@@ -42,10 +26,9 @@ export const ApplicationForm = ({ setLetterText }: ApplicationFormProps) => {
     } = useForm<ApplicationFormValues>();
 
     const onSubmit = handleSubmit((data) => {
-        const template = getTemplate(data);
+        const template = getCoverLetterTemplate(data);
         console.log(template);
-        setLetterText(template);
-        addLetter(template);
+        setLetter(template);
         setIsComplete(true);
     });
 

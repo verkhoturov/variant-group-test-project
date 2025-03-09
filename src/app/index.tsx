@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router';
 import { Providers } from './providers';
 
-import { HomePage } from '@/pages/home';
-import { CreateLetterPage } from '@/pages/createLetter';
+import { HomePage } from '@/pages/Home';
+import { CreateCoverLetterPage } from '@/pages/CreateCoverLetter';
 
 import './global.scss';
 
@@ -11,7 +11,7 @@ export const App = () => {
         <Providers>
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/create-letter" element={<CreateLetterPage />} />
+                <Route path="/create-letter" element={<CreateCoverLetterPage />} />
             </Routes>
         </Providers>
     );

@@ -1,12 +1,12 @@
 import { Card, Button } from '@/shared/ui';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 
-interface LetterProps {
+interface CoverLetterProps {
     text: string;
     removeLetter?: () => void;
 }
 
-export const Letter = ({ text, removeLetter }: LetterProps) => {
+export const CoverLetterCard = ({ text, removeLetter }: CoverLetterProps) => {
     const [copiedText, copyToClipboard] = useCopyToClipboard();
     const hasCopiedText = Boolean(copiedText);
 
