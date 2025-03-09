@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { CoverLetter } from '@/entities/CoverLetter';
+import { CoverLetter } from '@/entities/CoverLetter/model';
 
 const defaultValue = {
     coverLettersList: [],

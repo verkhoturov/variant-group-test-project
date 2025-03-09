@@ -1,5 +1,5 @@
 import { useLocalStorage } from '@uidotdev/usehooks';
-import { CoverLetter } from '@/entities/CoverLetter';
+import { CoverLetter } from '@/entities/CoverLetter/model';
 import { CoverLettersContext } from '../contexts/CoverLettersContext';
 
 export const CoverLettersProvider = ({ children }: { children: React.ReactNode }) => {

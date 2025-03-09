@@ -1,11 +1,12 @@
-import { BrowserRouter } from 'react-router';
+import dynamic from 'next/dynamic';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import { CoverLettersProvider } from './CoverLettersProvider';
+const CoverLettersProvider = dynamic(
+    () => import('./CoverLettersProvider').then((mod) => mod.CoverLettersProvider),
+    { ssr: false },
+);
 
 export const Providers = (props: { children: React.ReactNode }) => (
     <ChakraProvider value={defaultSystem}>
-        <BrowserRouter>
-            <CoverLettersProvider>{props.children}</CoverLettersProvider>
-        </BrowserRouter>
+        <CoverLettersProvider>{props.children}</CoverLettersProvider>
     </ChakraProvider>
 );

@@ -1,18 +1,10 @@
-import { Routes, Route } from 'react-router';
+import type { AppProps } from 'next/app';
 import { Providers } from './providers';
 
-import { HomePage } from '@/pages/Home';
-import { CreateCoverLetterPage } from '@/pages/CreateCoverLetter';
-
-import './global.scss';
-
-export const App = () => {
+export default function App({ Component, pageProps }: AppProps) {
     return (
         <Providers>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/create-cover-letter" element={<CreateCoverLetterPage />} />
-            </Routes>
+            <Component {...pageProps} />
         </Providers>
     );
-};
+}
