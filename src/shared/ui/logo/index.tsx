@@ -1,9 +1,10 @@
+import Link from 'next/link';
 import { LogoIcon } from './icons';
 
 export const Logo = () => {
     return (
-        <div>
+        <Link href="/">
             <LogoIcon />
-        </div>
+        </Link>
     );
 };

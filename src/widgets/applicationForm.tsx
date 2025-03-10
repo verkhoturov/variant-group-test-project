@@ -1,26 +1,22 @@
 import React, { memo } from 'react';
+import { UseMutateFunction } from '@tanstack/react-query';
 import { Heading, Separator, Input, Textarea } from '@chakra-ui/react';
 import { Field, Button } from '@/shared/ui';
 import { CoverLetter } from '@/entities/CoverLetter/model';
-import { getNewCoverLetter } from '@/entities/CoverLetter/lib';
+import { CoverLetterRequestParams } from '@/entities/CoverLetter/model';
 import { useForm } from 'react-hook-form';
 
-interface ApplicationFormValues {
-    jobTitle: string;
-    companyName: string;
-    skillsList: string;
-    details: string;
-}
-
 interface ApplicationFormProps {
-    setCoverLetter: (letter: CoverLetter) => void;
+    isLoading?: boolean;
+    coverLetterRequest: UseMutateFunction<CoverLetter, Error, CoverLetterRequestParams, unknown>;
 }
 
 const Form = memo(
     ({
         setJobTitle,
         setCompanyName,
-        setCoverLetter,
+        coverLetterRequest,
+        isLoading,
     }: ApplicationFormProps & {
         setJobTitle: (title: string) => void;
         setCompanyName: (name: string) => void;
@@ -31,11 +27,10 @@ const Form = memo(
             register,
             handleSubmit,
             formState: { errors },
-        } = useForm<ApplicationFormValues>();
+        } = useForm<CoverLetterRequestParams>();
 
         const onSubmit = handleSubmit((data) => {
-            const newCoverLetter = getNewCoverLetter(data);
-            setCoverLetter(newCoverLetter);
+            coverLetterRequest(data);
             setIsComplete(true);
         });
 
@@ -73,13 +68,15 @@ const Form = memo(
                         {...register('details')}
                     />
                 </Field>
-                <Button type="submit">{isComplete ? 'Try Again' : 'Generate Now'}</Button>
+                <Button type="submit" loading={isLoading}>
+                    {isComplete ? 'Try Again' : 'Generate Now'}
+                </Button>
             </form>
         );
     },
 );
 
-export const ApplicationForm = ({ setCoverLetter }: ApplicationFormProps) => {
+export const ApplicationForm = (props: ApplicationFormProps) => {
     const [jobTitle, setJobTitle] = React.useState('');
     const [companyName, setCompanyName] = React.useState('');
 
@@ -96,11 +93,7 @@ export const ApplicationForm = ({ setCoverLetter }: ApplicationFormProps) => {
 
             {/* усложнение ради мемоизации, чтобы не было ререндера всей формы когда 
              вводим что-то в поля "Job Title" и "Company" */}
-            <Form
-                setCoverLetter={setCoverLetter}
-                setJobTitle={setJobTitle}
-                setCompanyName={setCompanyName}
-            />
+            <Form {...props} setJobTitle={setJobTitle} setCompanyName={setCompanyName} />
         </>
     );
 };
