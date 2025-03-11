@@ -1,16 +1,19 @@
 import { useRouter } from 'next/router';
-import { Logo, Button } from '@/shared/ui';
+import { Logo, HomeIcon } from '@/shared/ui';
+import { IconButton, Box } from '@chakra-ui/react';
 import { Flex } from '@chakra-ui/react';
 
 export const Header = () => {
     const router = useRouter();
     return (
-        <header>
+        <Box as="header" py="32px">
             <Flex justifyContent="space-between" alignItems="center">
                 <Logo />
 
-                <Button onClick={() => router.push('/')}>home</Button>
+                <IconButton onClick={() => router.push('/')} variant="outline" color="#344054">
+                    <HomeIcon />
+                </IconButton>
             </Flex>
-        </header>
+        </Box>
     );
 };

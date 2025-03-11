@@ -88,7 +88,7 @@ export const ApplicationForm = (props: ApplicationFormProps) => {
 
     return (
         <>
-            <Heading>{getTitle()}</Heading>
+            <Heading size={'5xl'}>{getTitle()}</Heading>
             <Separator />
 
             {/* усложнение ради мемоизации, чтобы не было ререндера всей формы когда 
