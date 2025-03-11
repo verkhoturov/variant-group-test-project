@@ -20,8 +20,8 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(function Field
                 </UIField.Label>
             )}
             {children}
-            {helperText && <UIField.HelperText>{helperText}</UIField.HelperText>}
-            {errorText && <UIField.ErrorText>{errorText}</UIField.ErrorText>}
+            {helperText && <UIField.HelperText fontSize="14px">{helperText}</UIField.HelperText>}
+            {errorText && <UIField.ErrorText fontSize="14px">{errorText}</UIField.ErrorText>}
         </UIField.Root>
     );
 });

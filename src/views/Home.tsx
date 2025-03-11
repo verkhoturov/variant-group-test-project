@@ -12,20 +12,39 @@ export const HomePage = () => {
     return (
         <Page>
             <Flex justifyContent="space-between" alignItems="center">
-                <Heading size={'5xl'}>Applications</Heading>
+                <Heading
+                    as="h1"
+                    fontSize="24px"
+                    lineHeight="32px"
+                    lg={{
+                        fontSize: '48px',
+                        lineHeight: '60px',
+                    }}
+                >
+                    Applications
+                </Heading>
                 <Button
                     onClick={() => router.push('/create-cover-letter')}
                     colorPalette="green"
                     rounded="md"
-                    padding={"0 17px"}
-                    gap="9px"
+                    padding={'0 8px'}
+                    gap="4px"
+                    lg={{
+                        padding: '0 17px',
+                        gap: '9px',
+                    }}
                 >
                     <PlusIcon />
                     Create New
                 </Button>
             </Flex>
 
-            <Box py="15px">
+            <Box
+                padding="15px 0 15px"
+                lg={{
+                    padding: '15px 0 24px',
+                }}
+            >
                 <Separator />
             </Box>
 

@@ -7,7 +7,7 @@ interface PageProps {
 }
 
 export const Page = ({ children }: PageProps) => (
-    <Box maxW="1120px" mx="auto">
+    <Box maxW="1152px" px="16px" mx="auto">
         <Header />
         <main>{children}</main>
     </Box>
