@@ -7,7 +7,7 @@ import { ApplicationForm } from '@/widgets/ApplicationFormm';
 import { CoverLetterRequestParams, useCoverLettersStore } from '@/entities/CoverLetter/model';
 import { createCoverLetter } from '@/entities/CoverLetter/api';
 import { CoverLetterCard } from '@/widgets/CoverLetterCard';
-import { Header } from '@/widgets/Header';
+import { Header } from '@/widgets/Headerr';
 import { toast } from 'react-toastify';
 
 export const CreateCoverLetterPage = () => {
