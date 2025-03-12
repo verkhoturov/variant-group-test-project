@@ -1,9 +1,9 @@
-export * from './SubmitButton';
-export * from './Field';
-export * from './Card';
-export * from './Logo';
+export { SubmitButton } from './SubmitButton';
+export { Field } from './Field';
+export { Card } from './Card';
+export { Logo } from './Logo';
 export * from './Icons';
-export * from './Textarea';
-export * from './Loader';
-export * from './Page';
-export * from './Progress';
+export { Textarea } from './Textarea';
+export { Loader } from './Loader';
+export { Page } from './Page';
+export { Progress } from './Progress';
