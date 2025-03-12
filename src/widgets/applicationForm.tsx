@@ -32,7 +32,7 @@ const Form = memo(
 
         const onSubmit = handleSubmit((data) => {
             coverLetterRequest(data);
-            scrollToLetter && scrollToLetter();
+            if(scrollToLetter) scrollToLetter();
         });
 
         return (
