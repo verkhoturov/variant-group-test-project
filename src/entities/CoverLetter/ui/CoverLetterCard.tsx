@@ -1,4 +1,4 @@
-import { Card, Button, TrashIcon, CopyIcon } from '@/shared/ui';
+import { Card, Button, TrashIcon, CopyIcon, Loader } from '@/shared/ui';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { Text, Box } from '@chakra-ui/react';
 
@@ -54,7 +54,11 @@ export const CoverLetterCard = ({
     };
 
     if (isLoading) {
-        return <Card isCompactView={isCompactView}>Loading...</Card>;
+        return (
+            <Card className={styles.card} isCompactView={isCompactView}>
+                <Loader />
+            </Card>
+        );
     }
 
     return (

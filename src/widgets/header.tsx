@@ -6,7 +6,7 @@ import { Flex } from '@chakra-ui/react';
 export const Header = () => {
     const router = useRouter();
     return (
-        <Box as="header" py="32px">
+        <Box as="header" py="16px" lg={{ py: '32px' }}>
             <Flex justifyContent="space-between" alignItems="center">
                 <Logo />
 

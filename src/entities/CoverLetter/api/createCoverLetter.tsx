@@ -9,8 +9,8 @@ export const createCoverLetter = async (params: CoverLetterRequestParams): Promi
 
     const data: CoverLetter | CoverLetterResponseError = await res.json();
 
-    if (!res.ok && 'message' in data)
-        throw new Error(data.message || 'Failed to fetch response from OpenAI');
+    if (!res.ok && 'code' in data)
+        throw new Error(data.code || 'Failed to fetch response from OpenAI');
 
     return data as CoverLetter;
 };

@@ -1,14 +1,19 @@
 import React, { memo } from 'react';
 import { UseMutateFunction } from '@tanstack/react-query';
 import { Heading, Separator, Input, Box, Flex } from '@chakra-ui/react';
-import { Field, Button, Textarea, RepeatIcon } from '@/shared/ui';
+import { Field, SubmitButton, Textarea, RepeatIcon } from '@/shared/ui';
 import { CoverLetter } from '@/entities/CoverLetter/model';
 import { CoverLetterRequestParams } from '@/entities/CoverLetter/model';
 import { useForm } from 'react-hook-form';
 
 interface ApplicationFormProps {
     isLoading?: boolean;
-    coverLetterRequest: UseMutateFunction<CoverLetter, Error, CoverLetterRequestParams, unknown>;
+    createCoverLetterRequest: UseMutateFunction<
+        CoverLetter,
+        Error,
+        CoverLetterRequestParams,
+        unknown
+    >;
     scrollToLetter?: () => void;
 }
 
@@ -16,7 +21,7 @@ const Form = memo(
     ({
         setJobTitle,
         setCompanyName,
-        coverLetterRequest,
+        createCoverLetterRequest,
         isLoading,
         scrollToLetter,
     }: ApplicationFormProps & {
@@ -26,13 +31,13 @@ const Form = memo(
         const {
             register,
             handleSubmit,
-            formState: { errors, isValid, isSubmitSuccessful },
+            formState: { errors, isValid, isSubmitted },
             control,
         } = useForm<CoverLetterRequestParams>();
 
         const onSubmit = handleSubmit((data) => {
-            coverLetterRequest(data);
-            if(scrollToLetter) scrollToLetter();
+            createCoverLetterRequest(data);
+            if (scrollToLetter) scrollToLetter();
         });
 
         return (
@@ -88,45 +93,8 @@ const Form = memo(
                     control={control}
                 />
 
-                <Button
-                    type="submit"
-                    loading={isLoading}
-                    size="xl"
-                    height="60px"
-                    fontSize="18px"
-                    rounded="md"
-                    opacity={1}
-                    gap="9px"
-                    backgroundColor={
-                        isLoading
-                            ? 'green.200'
-                            : isSubmitSuccessful
-                              ? 'white'
-                              : isValid
-                                ? 'green.200'
-                                : 'gray.300'
-                    }
-                    color={
-                        isLoading
-                            ? 'white'
-                            : isSubmitSuccessful
-                              ? 'gray.900'
-                              : isValid
-                                ? 'white'
-                                : 'gray.600'
-                    }
-                    borderColor={
-                        isLoading
-                            ? 'green.200'
-                            : isSubmitSuccessful
-                              ? 'gray.300'
-                              : isValid
-                                ? 'green.200'
-                                : 'gray.300'
-                    }
-                    disabled={!isValid}
-                >
-                    {isSubmitSuccessful ? (
+                <SubmitButton loading={isLoading} isSubmitted={isSubmitted} disabled={!isValid}>
+                    {isSubmitted ? (
                         <>
                             <RepeatIcon />
                             Try Again
@@ -134,7 +102,7 @@ const Form = memo(
                     ) : (
                         'Generate Now'
                     )}
-                </Button>
+                </SubmitButton>
             </Flex>
         );
     },
