@@ -3,11 +3,11 @@ import { useShallow } from 'zustand/shallow';
 import { useMutation } from '@tanstack/react-query';
 import { Flex } from '@chakra-ui/react';
 import { Page } from '@/shared/ui';
-import { ApplicationForm } from '@/widgets/ApplicationFormm';
+import { ApplicationForm } from '@/widgets/ApplicationForm';
 import { CoverLetterRequestParams, useCoverLettersStore } from '@/entities/CoverLetter/model';
 import { createCoverLetter } from '@/entities/CoverLetter/api';
 import { CoverLetterCard } from '@/widgets/CoverLetterCard';
-import { Header } from '@/widgets/Headerr';
+import { Header } from '@/widgets/Header';
 import { toast } from 'react-toastify';
 
 export const CreateCoverLetterPage = () => {

@@ -4,7 +4,7 @@ import { Page, PlusIcon } from '@/shared/ui';
 import { Button, Heading, Separator, Flex, Box } from '@chakra-ui/react';
 import { useCoverLettersStore } from '@/entities/CoverLetter/model';
 import { LettersList } from '@/widgets/CoverLettersList';
-import { Header } from '@/widgets/Headerr';
+import { Header } from '@/widgets/Header';
 import { HitGoal } from '@/widgets/HitGoal';
 
 export const HomePage = () => {
