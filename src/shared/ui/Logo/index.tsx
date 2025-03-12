@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LogoIcon } from './icons';
+import { LogoIcon } from '../Icons';
 
 export const Logo = () => {
     return (
