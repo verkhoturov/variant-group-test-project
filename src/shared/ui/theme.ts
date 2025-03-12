@@ -9,7 +9,14 @@ const customConfig = defineConfig({
             },
             colors: {
                 heading: { value: '#101828' },
-                green: { value: '#087443' },
+                green: {
+                    100: { value: '#73E2A3' },
+                    200: { value: '#087443' },
+                },
+                red: {
+                    100: { value: '#FDA29B' },
+                    200: { value: '#F04438' },
+                },
                 disabled: { value: '#D0D5DD' },
                 gray: {
                     100: { value: '#F3F4F6' },
@@ -18,6 +25,9 @@ const customConfig = defineConfig({
                     500: { value: '#98A2B3' },
                     600: { value: '#667085' },
                     900: { value: '#475467' },
+                },
+                black: {
+                    900: { value: '#344054' },
                 },
             },
             fontWeights: {

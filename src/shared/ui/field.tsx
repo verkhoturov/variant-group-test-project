@@ -21,7 +21,11 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(function Field
             )}
             {children}
             {helperText && <UIField.HelperText fontSize="14px">{helperText}</UIField.HelperText>}
-            {errorText && <UIField.ErrorText fontSize="14px">{errorText}</UIField.ErrorText>}
+            {errorText && (
+                <UIField.ErrorText color={'red.200'} fontSize="14px">
+                    {errorText}
+                </UIField.ErrorText>
+            )}
         </UIField.Root>
     );
 });

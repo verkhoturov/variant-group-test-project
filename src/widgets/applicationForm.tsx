@@ -1,14 +1,15 @@
 import React, { memo } from 'react';
 import { UseMutateFunction } from '@tanstack/react-query';
-import { Heading, Separator, Input, Textarea, Box, Flex } from '@chakra-ui/react';
-import { Field, Button } from '@/shared/ui';
+import { Heading, Separator, Input, Box, Flex } from '@chakra-ui/react';
+import { Field, Button, Textarea, RepeatIcon } from '@/shared/ui';
 import { CoverLetter } from '@/entities/CoverLetter/model';
 import { CoverLetterRequestParams } from '@/entities/CoverLetter/model';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 interface ApplicationFormProps {
     isLoading?: boolean;
     coverLetterRequest: UseMutateFunction<CoverLetter, Error, CoverLetterRequestParams, unknown>;
+    scrollToLetter?: () => void;
 }
 
 const Form = memo(
@@ -17,27 +18,21 @@ const Form = memo(
         setCompanyName,
         coverLetterRequest,
         isLoading,
+        scrollToLetter,
     }: ApplicationFormProps & {
         setJobTitle: (title: string) => void;
         setCompanyName: (name: string) => void;
     }) => {
-        const [isComplete, setIsComplete] = React.useState(false);
-
         const {
             register,
             handleSubmit,
-            formState: { errors, isValid },
+            formState: { errors, isValid, isSubmitSuccessful },
             control,
         } = useForm<CoverLetterRequestParams>();
 
-        const detailsValue = useWatch({
-            control,
-            name: 'details',
-        });
-
         const onSubmit = handleSubmit((data) => {
             coverLetterRequest(data);
-            setIsComplete(true);
+            scrollToLetter && scrollToLetter();
         });
 
         return (
@@ -47,6 +42,8 @@ const Form = memo(
                         <Input
                             placeholder="Product manager"
                             fontSize="16px"
+                            boxShadow={'0px 1px 2px 0px #1018280D'}
+                            borderColor={'gray.300'}
                             {...register('jobTitle', {
                                 required: 'Job title is required',
                                 onChange: (e) => setJobTitle(e.target.value),
@@ -57,6 +54,8 @@ const Form = memo(
                         <Input
                             placeholder="Apple"
                             fontSize="16px"
+                            boxShadow={'0px 1px 2px 0px #1018280D'}
+                            borderColor={'gray.300'}
                             {...register('companyName', {
                                 required: 'Company is required',
                                 onChange: (e) => setCompanyName(e.target.value),
@@ -68,27 +67,26 @@ const Form = memo(
                     <Input
                         placeholder="HTML, CSS and doing things in time"
                         fontSize="16px"
+                        boxShadow={'0px 1px 2px 0px #1018280D'}
+                        borderColor={'gray.300'}
                         {...register('skillsList', {
                             required: 'Skills are required',
                         })}
                     />
                 </Field>
-                <Field
+
+                {/* Textarea вынесено в отельный компоненнт ради мемоизации, чтобы не было ререндера всей формы когда 
+                вводим что-то поле "details" */}
+                <Textarea<CoverLetterRequestParams>
                     label="Additional details"
-                    errorText={errors.details?.message}
-                    helperText={`${detailsValue?.length ?? 0}/1200`}
-                    marginBottom="4px"
-                >
-                    <Textarea
-                        placeholder="Describe why you are a great fit or paste your bio"
-                        fontSize="16px"
-                        resize="none"
-                        paddingTop="14px"
-                        paddingBottom={0}
-                        rows={11}
-                        {...register('details')}
-                    />
-                </Field>
+                    name="details"
+                    placeholder="Describe why you are a great fit or paste your bio"
+                    rows={11}
+                    resize="none"
+                    showSymbolsCount
+                    register={register}
+                    control={control}
+                />
 
                 <Button
                     type="submit"
@@ -98,11 +96,44 @@ const Form = memo(
                     fontSize="18px"
                     rounded="md"
                     opacity={1}
-                    backgroundColor={isValid ? 'green' : 'gray.300'}
-                    color={isValid ? 'white' : 'gray.600'}
+                    gap="9px"
+                    backgroundColor={
+                        isLoading
+                            ? 'green.200'
+                            : isSubmitSuccessful
+                              ? 'white'
+                              : isValid
+                                ? 'green.200'
+                                : 'gray.300'
+                    }
+                    color={
+                        isLoading
+                            ? 'white'
+                            : isSubmitSuccessful
+                              ? 'gray.900'
+                              : isValid
+                                ? 'white'
+                                : 'gray.600'
+                    }
+                    borderColor={
+                        isLoading
+                            ? 'green.200'
+                            : isSubmitSuccessful
+                              ? 'gray.300'
+                              : isValid
+                                ? 'green.200'
+                                : 'gray.300'
+                    }
                     disabled={!isValid}
                 >
-                    {isComplete ? 'Try Again' : 'Generate Now'}
+                    {isSubmitSuccessful ? (
+                        <>
+                            <RepeatIcon />
+                            Try Again
+                        </>
+                    ) : (
+                        'Generate Now'
+                    )}
                 </Button>
             </Flex>
         );

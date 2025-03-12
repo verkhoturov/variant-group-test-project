@@ -15,6 +15,17 @@ export const CreateCoverLetterPage = () => {
         mutationFn: async (params: CoverLetterRequestParams) => await createCoverLetter(params),
     });
 
+    // для мобильной версии, чтобы пользователя автоматически переносило к тексту письма
+    const scrollToLetter = () => {
+        setTimeout(() => {
+            const element = document.getElementById('new-letter');
+            if (element) {
+                const top = element.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        }, 100); // хак чтобы скролл сработал даже если часть блока с письмом уже видна
+    };
+
     React.useEffect(() => {
         if (query.isSuccess && query.data) {
             saveCoverLetter(query.data);
@@ -24,14 +35,24 @@ export const CreateCoverLetterPage = () => {
 
     return (
         <Page>
-            <Flex justifyContent="space-between" gap="32px">
+            <Flex
+                flexDirection={'column'}
+                gap="24px"
+                paddingBottom={'24px'}
+                md={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    gap: '32px',
+                }}
+            >
                 <Flex basis="544px" flexDirection="column">
                     <ApplicationForm
                         isLoading={query.isPending}
                         coverLetterRequest={query.mutate}
+                        scrollToLetter={scrollToLetter}
                     />
                 </Flex>
-                <Flex basis="544px">
+                <Flex basis="544px" id="new-letter">
                     <CoverLetterCard isLoading={query.isPending} text={query.data?.text} />
                 </Flex>
             </Flex>
