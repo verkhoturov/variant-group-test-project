@@ -12,7 +12,5 @@ export interface CoverLetterRequestParams {
 
 export interface CoverLetterResponseError {
     message: string;
-    type: string;
-    param: string | null;
     code: string | null;
 }

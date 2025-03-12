@@ -34,7 +34,7 @@ export const Textarea = <T extends FieldValues>({
 
     const getBorderColor = () => {
         if (!isValid) return { border: 'red.100', shadow: '0px 0px 0px 4px #FEE4E2' };
-        if (isFocus) return { border: 'green.100', shadow: '0px 0px 0px 4px #D3F8DF' };
+        if (isFocus) return { border: 'green.200', shadow: '0px 0px 0px 4px #D3F8DF' };
         return { border: 'gray.300', shadow: '0px 1px 2px 0px #1018280D' };
     };
 
@@ -50,6 +50,7 @@ export const Textarea = <T extends FieldValues>({
                 {...register(name)}
                 fontSize="16px"
                 paddingTop="14px"
+                paddingBottom="0"
                 borderColor={getBorderColor().border}
                 boxShadow={getBorderColor().shadow}
                 focusRing={'outside'}

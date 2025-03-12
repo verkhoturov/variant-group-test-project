@@ -15,6 +15,7 @@ interface ApplicationFormProps {
         unknown
     >;
     scrollToLetter?: () => void;
+    disabled: boolean;
 }
 
 const Form = memo(
@@ -24,6 +25,7 @@ const Form = memo(
         createCoverLetterRequest,
         isLoading,
         scrollToLetter,
+        disabled,
     }: ApplicationFormProps & {
         setJobTitle: (title: string) => void;
         setCompanyName: (name: string) => void;
@@ -53,6 +55,7 @@ const Form = memo(
                                 required: 'Job title is required',
                                 onChange: (e) => setJobTitle(e.target.value),
                             })}
+                            disabled={disabled}
                         />
                     </Field>
                     <Field label="Company" errorText={errors.companyName?.message}>
@@ -65,6 +68,7 @@ const Form = memo(
                                 required: 'Company is required',
                                 onChange: (e) => setCompanyName(e.target.value),
                             })}
+                            disabled={disabled}
                         />
                     </Field>
                 </Flex>
@@ -77,6 +81,7 @@ const Form = memo(
                         {...register('skillsList', {
                             required: 'Skills are required',
                         })}
+                        disabled={disabled}
                     />
                 </Field>
 
@@ -91,10 +96,18 @@ const Form = memo(
                     showSymbolsCount
                     register={register}
                     control={control}
+                    marginBottom="6px"
+                    disabled={disabled}
                 />
 
-                <SubmitButton loading={isLoading} isSubmitted={isSubmitted} disabled={!isValid}>
-                    {isSubmitted ? (
+                <SubmitButton
+                    loading={isLoading}
+                    isSubmitted={isSubmitted}
+                    disabled={!isValid || disabled}
+                >
+                    {disabled ? (
+                        'Too many letters'
+                    ) : isSubmitted ? (
                         <>
                             <RepeatIcon />
                             Try Again

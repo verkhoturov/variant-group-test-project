@@ -1,16 +1,22 @@
 import React from 'react';
+import { useShallow } from 'zustand/shallow';
 import { useMutation } from '@tanstack/react-query';
 import { Flex } from '@chakra-ui/react';
-import { useCoverLetters } from '@/app/hooks/useCoverLetters';
+import { Page } from '@/shared/ui';
 import { ApplicationForm } from '@/widgets/ApplicationForm';
-import { CoverLetterRequestParams } from '@/entities/CoverLetter/model';
+import { CoverLetterRequestParams, useCoverLettersStore } from '@/entities/CoverLetter/model';
 import { createCoverLetter } from '@/entities/CoverLetter/api';
-import { CoverLetterCard } from '@/entities/CoverLetter/ui';
-import { Page } from '@/widgets/Page';
+import { CoverLetterCard } from '@/widgets/CoverLetterCard';
+import { Header } from '@/widgets/Header';
 import { toast } from 'react-toastify';
 
 export const CreateCoverLetterPage = () => {
-    const { saveCoverLetter } = useCoverLetters();
+    const { coverLettersList, saveCoverLetter } = useCoverLettersStore(
+        useShallow((state) => ({
+            coverLettersList: state.coverLettersList,
+            saveCoverLetter: state.saveCoverLetter,
+        })),
+    );
 
     const query = useMutation({
         mutationFn: async (params: CoverLetterRequestParams) => await createCoverLetter(params),
@@ -53,6 +59,7 @@ export const CreateCoverLetterPage = () => {
 
     return (
         <Page>
+            <Header coverLettersCount={coverLettersList.length} />
             <Flex
                 flexDirection={'column'}
                 gap="24px"
@@ -68,6 +75,7 @@ export const CreateCoverLetterPage = () => {
                         isLoading={query.isPending}
                         createCoverLetterRequest={query.mutate}
                         scrollToLetter={scrollToLetter}
+                        disabled={coverLettersList.length >= 5}
                     />
                 </Flex>
                 <Flex basis="544px" id="new-letter">

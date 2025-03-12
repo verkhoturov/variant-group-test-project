@@ -10,8 +10,9 @@ const customConfig = defineConfig({
             colors: {
                 heading: { value: '#101828' },
                 green: {
-                    100: { value: '#73E2A3' },
-                    200: { value: '#087443' },
+                    100: { value: '#EDFCF2' },
+                    200: { value: '#73E2A3' },
+                    300: { value: '#087443' },
                 },
                 red: {
                     100: { value: '#FDA29B' },

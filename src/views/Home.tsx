@@ -1,19 +1,28 @@
 import { useRouter } from 'next/router';
-import { Button, PlusIcon } from '@/shared/ui';
+import { useShallow } from 'zustand/shallow';
+import { Page, Button, PlusIcon } from '@/shared/ui';
 import { Heading, Separator, Flex, Box } from '@chakra-ui/react';
-import { useCoverLetters } from '@/app/hooks/useCoverLetters';
+import { useCoverLettersStore } from '@/entities/CoverLetter/model';
 import { LettersList } from '@/widgets/CoverLettersList';
-import { Page } from '@/widgets/Page';
+import { Header } from '@/widgets/Header';
+import { HitGoal } from '@/widgets/HitGoal';
 
 export const HomePage = () => {
     const router = useRouter();
-    const { coverLettersList, removeCoverLetter } = useCoverLetters();
+    const { coverLettersList, removeCoverLetter } = useCoverLettersStore(
+        useShallow((state) => ({
+            coverLettersList: state.coverLettersList,
+            removeCoverLetter: state.removeCoverLetter,
+        })),
+    );
 
     return (
         <Page>
+            <Header coverLettersCount={coverLettersList.length} />
             <Flex justifyContent="space-between" alignItems="center">
                 <Heading
                     as="h1"
+                    letterSpacing="-1.25px"
                     fontSize="24px"
                     lineHeight="32px"
                     lg={{
@@ -25,7 +34,7 @@ export const HomePage = () => {
                 </Heading>
                 <Button
                     onClick={() => router.push('/create-cover-letter')}
-                    backgroundColor={'green.200'}
+                    backgroundColor={'green.300'}
                     rounded="md"
                     padding={'0 8px'}
                     gap="4px"
@@ -49,6 +58,8 @@ export const HomePage = () => {
             </Box>
 
             <LettersList lettersList={coverLettersList} removeLetter={removeCoverLetter} />
+
+            <HitGoal coverLettersCount={coverLettersList.length} />
         </Page>
     );
 };

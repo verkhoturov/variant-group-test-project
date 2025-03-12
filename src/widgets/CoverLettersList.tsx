@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 import { CoverLetter } from '@/entities/CoverLetter/model';
-import { CoverLetterCard } from '@/entities/CoverLetter/ui';
+import { CoverLetterCard } from '@/widgets/CoverLetterCard';
 
 interface LettersListProps {
     lettersList: CoverLetter[];

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Header } from '@/widgets/Header';
 import { Box } from '@chakra-ui/react';
 
 interface PageProps {
@@ -7,8 +6,7 @@ interface PageProps {
 }
 
 export const Page = ({ children }: PageProps) => (
-    <Box maxW="1152px" px="16px" mx="auto">
-        <Header />
+    <Box maxW="1152px" px="16px" py="32px" mx="auto">
         <main>{children}</main>
     </Box>
 );

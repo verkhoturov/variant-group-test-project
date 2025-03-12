@@ -6,3 +6,5 @@ export * from './Logo';
 export * from './Icons';
 export * from './Textarea';
 export * from './Loader';
+export * from './Page';
+export * from './Progress';

@@ -7,9 +7,9 @@ interface SubmitButtonProps extends ButtonProps {
 
 export const SubmitButton = ({ children, loading, disabled, isSubmitted }: SubmitButtonProps) => {
     const getBackgroundColor = () => {
-        if (loading) return 'green.200';
+        if (loading) return 'green.300';
         if (isSubmitted) return 'white';
-        if (!disabled) return 'green.200';
+        if (!disabled) return 'green.300';
         return 'gray.300';
     };
 
@@ -21,9 +21,9 @@ export const SubmitButton = ({ children, loading, disabled, isSubmitted }: Submi
     };
 
     const getBorderColor = () => {
-        if (loading) return 'green.200';
+        if (loading) return 'green.300';
         if (isSubmitted) return 'gray.300';
-        if (!disabled) return 'green.200';
+        if (!disabled) return 'green.300';
         return 'gray.300';
     };
 
