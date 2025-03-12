@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useShallow } from 'zustand/shallow';
-import { Page, Button, PlusIcon } from '@/shared/ui';
-import { Heading, Separator, Flex, Box } from '@chakra-ui/react';
+import { Page, PlusIcon } from '@/shared/ui';
+import { Button, Heading, Separator, Flex, Box } from '@chakra-ui/react';
 import { useCoverLettersStore } from '@/entities/CoverLetter/model';
 import { LettersList } from '@/widgets/CoverLettersList';
 import { Header } from '@/widgets/Header';

@@ -1,4 +1,3 @@
-export * from './Button';
 export * from './SubmitButton';
 export * from './Field';
 export * from './Card';

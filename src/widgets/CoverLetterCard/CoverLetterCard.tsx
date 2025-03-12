@@ -1,6 +1,6 @@
-import { Card, Button, TrashIcon, CopyIcon, Loader } from '@/shared/ui';
+import { Card, TrashIcon, CopyIcon, Loader } from '@/shared/ui';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
-import { Text, Box } from '@chakra-ui/react';
+import { Button, Text, Box } from '@chakra-ui/react';
 
 import styles from './CoverLetterCard.module.scss';
 
