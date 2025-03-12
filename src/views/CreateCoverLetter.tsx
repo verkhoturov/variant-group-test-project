@@ -3,7 +3,7 @@ import { useShallow } from 'zustand/shallow';
 import { useMutation } from '@tanstack/react-query';
 import { Flex } from '@chakra-ui/react';
 import { Page } from '@/shared/ui';
-import { ApplicationForm } from '@/widgets/ApplicationForm';
+import { ApplicationForm } from '@/widgets/ApplicationFormm';
 import { CoverLetterRequestParams, useCoverLettersStore } from '@/entities/CoverLetter/model';
 import { createCoverLetter } from '@/entities/CoverLetter/api';
 import { CoverLetterCard } from '@/widgets/CoverLetterCard';
