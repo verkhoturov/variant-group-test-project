@@ -30,6 +30,8 @@ const Form = memo(
         setJobTitle: (title: string) => void;
         setCompanyName: (name: string) => void;
     }) => {
+        const [isTextareaValid, setIsTextareaValid] = React.useState(true);
+
         const {
             register,
             handleSubmit,
@@ -98,12 +100,14 @@ const Form = memo(
                     control={control}
                     marginBottom="6px"
                     disabled={disabled}
+                    maxLength={1200}
+                    setIsValid={setIsTextareaValid}
                 />
 
                 <SubmitButton
                     loading={isLoading}
                     isSubmitted={isSubmitted}
-                    disabled={!isValid || disabled}
+                    disabled={!isValid || disabled || !isTextareaValid}
                 >
                     {disabled ? (
                         'Too many letters'

@@ -11,6 +11,7 @@ interface TextareaProps<T extends FieldValues> extends UITextareaProps {
     showSymbolsCount?: boolean;
     maxLength?: number;
     label?: string;
+    setIsValid?: (isValid: boolean) => void;
 }
 
 export const Textarea = <T extends FieldValues>({
@@ -21,6 +22,7 @@ export const Textarea = <T extends FieldValues>({
     name,
     label,
     maxLength = 1200,
+    setIsValid,
     ...props
 }: TextareaProps<T>) => {
     const [isFocus, setFocus] = React.useState(false);
@@ -31,6 +33,10 @@ export const Textarea = <T extends FieldValues>({
 
     const description = showSymbolsCount ? `${value?.length ?? 0}/${maxLength}` : helperText;
     const isValid = showSymbolsCount ? (value?.length ?? 0) <= maxLength : true;
+
+    React.useEffect(() => {
+        setIsValid?.(isValid); // Сообщаем в Form, когда валидность меняется
+    }, [isValid, setIsValid]);
 
     const getBorderColor = () => {
         if (!isValid) return { border: 'red.100', shadow: '0px 0px 0px 4px #FEE4E2' };
