@@ -3,6 +3,7 @@
 ## Стэк
 
 Для создания проекта использовались:
+
 [Nextjs](https://nextjs.org/docs)
 
 [Chakra UI](https://chakra-ui.com/docs/get-started/installation)
