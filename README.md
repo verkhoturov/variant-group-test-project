@@ -1,53 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with
-[`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Variant group test project
 
-## Getting Started
+## Стэк
 
-First, run the development server:
+Для создания проекта использовались:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[Nextjs](https://nextjs.org/docs)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[Chakra UI](https://chakra-ui.com/docs/get-started/installation)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the
-file.
+[React Hook Form](https://react-hook-form.com/get-started)
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be
-accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be
-edited in `pages/api/hello.ts`.
+[Tanstack Query](https://tanstack.com/query/latest)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of
-React pages.
+[Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
 
-This project uses
-[`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to
-automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+[React Toastify](https://fkhadra.github.io/react-toastify/category/getting-started)
 
-## Learn More
+[FSD](https://feature-sliced.design/docs)
 
-To learn more about Next.js, take a look at the following resources:
+Демо можно посмотреть [здесь](https://variant-group-test-project.vercel.app/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## Немного про мотивацию использовать указанный стэк и подробности реализации
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback
-and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
-
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying)
-for more details.
+- **Nextjs** (pages route) - используется для [проксирования запросов к OpenAI API](https://github.com/verkhoturov/variant-group-test-project/blob/main/src/pages/api/openai.ts), так как использовать API key на клиенте небезопасно. Заводить отдельный проект с бэкенд сервисом всего для одной ручки API мне показалось лишним, проще было взять фуллстек фреймворк типа Nextjs.
+- **Chakra UI** - взят чтобы не городить велосипеды из базовых компонентов. В библиотеке есть все нужные элементы, легко стилизуются через [конфигурацию](https://github.com/verkhoturov/variant-group-test-project/blob/main/src/shared/ui/theme.ts) библиотеки и через параметры самих компонентов.
+- **Zustand** - минималистичный store, из коробки (в одну строку кода) работает сохранение текущих данных в локальное хранилище. Вместо Zustand можно было организовать управление данными через React Context, но в данном случае было бы просто больше кода, плюс велосипед для работы с локальным хранилищем.
+- **React Toastify** - для отображения всплывающих уведомлений с ошибками, если по какой-то причине не работает подключение к OpenAI API (протух ключ, недоступен сам сервис). В макетах не было состояний ошибок, поэтому проще всего их было показывать через всплывашки.
+- **Tanstack Query** - для управления состоянием запросов к API. Конечно, можно было бы написать свое решение в виде отдельного хука с useState'ами для хранения состояний запросов к API, но расширять и поддерживать такие кастомные решения становится сложно по мере роста проекта. Tanstack Query уже закрывает большенство задач, плюс у библиотеки очень хорошая документация.
+- **FSD** - для организации файловой структуры. В данном конкретном случае, FSD используется с двумя оговорками:
+  1) Cтруктура FSD конфликтует со структурой Nextjs на уровне каталога pages (Nextjs хранит в pages роуты, а FSD компоненты для страниц), чтобы решить конфликт, по [рекомендации из документации](https://feature-sliced.design/docs/guides/tech/with-nextjs#renaming-the-pages-layer-within-the-fsd-structure) FSD pages был переименован во views.
+  2) Не был реализован слой Features, фактически все фичи находятся в рамках Widgets
