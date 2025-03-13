@@ -12,10 +12,11 @@ export const HitGoal = ({ coverLettersCount }: HitGoalProps) => {
     if (coverLettersCount >= 5) return null;
 
     return (
-        <Box backgroundColor={'green.100'} padding="24px 12px" borderRadius="12px" marginTop="48px">
+        <Box backgroundColor={'green.100'} borderRadius="12px">
             <Flex
                 justifyContent="center"
                 alignItems="center"
+                padding="24px 12px"
                 lg={{
                     minHeight: '376px',
                 }}

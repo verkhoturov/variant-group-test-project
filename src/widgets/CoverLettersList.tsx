@@ -12,9 +12,11 @@ export const LettersList = ({ lettersList, removeLetter }: LettersListProps) => 
         <Flex
             wrap="wrap"
             gapY="15px"
+            paddingBottom="24px"
             lg={{
                 gapX: '16px',
                 gapY: '24px',
+                paddingBottom: lettersList.length > 0 ? '49px' : '22px',
             }}
         >
             {lettersList.map(({ text, id }) => (

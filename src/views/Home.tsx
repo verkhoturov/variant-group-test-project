@@ -34,6 +34,7 @@ export const HomePage = () => {
                 </Heading>
                 <Button
                     onClick={() => router.push('/create-cover-letter')}
+                    size="lg"
                     backgroundColor={'green.300'}
                     rounded="md"
                     padding={'0 8px'}
