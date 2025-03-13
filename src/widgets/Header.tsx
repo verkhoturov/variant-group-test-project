@@ -29,7 +29,12 @@ export const Header = memo(({ coverLettersCount }: HeaderProps) => {
                         <Text>{coverLettersCount}/5 applications generated</Text>
                         <Progress max={5} count={coverLettersCount} isDots />
                     </Flex>
-                    <IconButton onClick={() => router.push('/')} variant="outline" color="#344054">
+                    <IconButton
+                        onClick={() => router.push('/')}
+                        variant="outline"
+                        color="#344054"
+                        aria-label="Go to home"
+                    >
                         <HomeIcon />
                     </IconButton>
                 </Flex>

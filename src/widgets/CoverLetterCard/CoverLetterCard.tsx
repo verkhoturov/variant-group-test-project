@@ -4,7 +4,7 @@ import { Button, Text, Box } from '@chakra-ui/react';
 
 import styles from './CoverLetterCard.module.scss';
 
-const getPreviewText = (text: string) => `${text.substring(0, 240)}...`;
+const getPreviewText = (text: string) => `${text.substring(0, 350)}...`;
 
 const ActionButton = ({
     children,
